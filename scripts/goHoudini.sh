@@ -59,7 +59,7 @@ for arg in "$@"; do
     esac
 done
 
-export HOUDINI_PATH=$HOUDINI_PATH:$HFS/houdini:/opt/sidefx_packages/SideFXLabs$HFS_VERSION
+export HOUDINI_PATH=$HOUDINI_PATH:$HOME/houdini$HFS_VERSION:$HFS/houdini:/opt/sidefx_packages/SideFXLabs$HFS_VERSION
 
 # ----- Renderman ----- #
 #
