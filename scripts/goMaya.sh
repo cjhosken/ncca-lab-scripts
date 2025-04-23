@@ -8,8 +8,33 @@
 HERE=$(pwd)
 FILE=""
 
-# Custom OCIO Config from Jeremy Hardin
-#export OCIO=/public/bapublic/jhardin/tools/OCIO/BU_nov2024_config.ocio
+# Custom OCIO Config path 
+OCIO_CONFIG=""
+
+# Check command-line arguments for render engine flags
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --ocio)
+            shift
+            if [[ -n "$1" && ! "$1" =~ ^-- ]]; then
+                OCIO_CONFIG="$1"
+                shift
+            else
+                echo "Error: --ocio requires a config file path"
+                exit 1
+            fi
+            ;;
+        *)
+            FILE="$FILE $1"
+            shift
+            ;;
+    esac
+done
+
+if [[ -n "$OCIO_CONFIG" ]]; then
+    echo "OCIO Config Path (--ocio): $OCIO_CONFIG"
+    export OCIO=$OCIO_CONFIG
+fi
 
 # Maya Environment Variables
 MAYA_VERSION=2023

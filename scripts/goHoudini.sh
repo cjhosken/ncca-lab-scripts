@@ -7,6 +7,7 @@
 # Setup Environment Variables
 HERE=$(pwd)
 FILE=""
+DIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
 # Custom OCIO Config from Jeremy Hardin
 # export OCIO=/public/bapublic/jhardin/tools/OCIO/BU_nov2024_config.ocio
@@ -43,21 +44,45 @@ fi
 # Initialize render engines to be disabled by default
 USE_RENDERMAN=false
 USE_ARNOLD=false
+OCIO_CONFIG=""
 
 # Check command-line arguments for render engine flags
-for arg in "$@"; do
-    case $arg in
+while [[ $# -gt 0 ]]; do
+    case "$1" in
         --prman)
             USE_RENDERMAN=true
+            shift
             ;;
         --arnold)
             USE_ARNOLD=true
+            shift
+            ;;
+        --ocio)
+            shift
+            if [[ -n "$1" && ! "$1" =~ ^-- ]]; then
+                OCIO_CONFIG="$1"
+                shift
+            else
+                echo "Error: --ocio requires a config file path"
+                exit 1
+            fi
             ;;
         *)
-            FILE="$FILE $arg"
+            FILE="$FILE $1"
+            shift
             ;;
     esac
 done
+
+echo ""
+echo "RenderMan enabled (--prman): $USE_RENDERMAN"
+echo "Arnold enabled (--arnold): $USE_ARNOLD"
+echo ""
+
+if [[ -n "$OCIO_CONFIG" ]]; then
+    echo "OCIO Config Path (--ocio): $OCIO_CONFIG"
+    export OCIO=$OCIO_CONFIG
+fi
 
 export HOUDINI_PATH=$HOUDINI_PATH:$HOME/houdini$HFS_VERSION:$HFS/houdini:/opt/sidefx_packages/SideFXLabs$HFS_VERSION
 
@@ -136,17 +161,25 @@ if $USE_RENDERMAN; then
    
    RFH=$RFHTREE/3.11/20.5.278
    export HOUDINI_PATH=$HOUDINI_PATH:$RFH
-
-else
-    echo "RenderMan for Houdini is disabled. Use --prman to enable. (BROKEN)"
 fi
 
 # ----- Arnold ----- #
-# Users will need to install the correct HtoA version from the Autodesk site and install it locally.
 if $USE_ARNOLD; then
-    export HOUDINI_PATH=$HOUDINI_PATH:$HTOA
-else
-    echo "Arnold for Houdini is disabled. Use --arnold to enable."
+    # First try with absolute path
+    SEARCH_PATH="$DIR/../plugins/htoa"
+    echo "Searching for HtoA in: $SEARCH_PATH"
+    # Find the first directory starting with 'htoa-' inside plugins/htoa
+    HTOA_DIR=$(ls -d $SEARCH_PATH/htoa-* 2>/dev/null | head -n 1)
+
+    echo $HTOA_DIR
+    
+    if [ -n "$HTOA_DIR" ]; then
+        export HTOA="$HTOA_DIR"
+        export HOUDINI_PATH="$HOUDINI_PATH:$HTOA"
+        echo "HtoA found: $HTOA"
+    else
+        echo "Warning: HtoA plugin directory not found in $DIR/../plugins/htoa" >&2
+    fi
 fi
 
 ############################################
