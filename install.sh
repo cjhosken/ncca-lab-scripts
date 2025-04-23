@@ -14,7 +14,7 @@ cd $HOME
 rm -rf ~/.oh-my-bash
 
 /public/devel/24-25/bin/new_install_python.sh
-python3 ensurepip --default-pip
+python3 -m ensurepip --default-pip
 
 # Copy Go Scripts & Tools
 mkdir -p $INSTALL_ROOT/scripts
@@ -37,6 +37,6 @@ mkdir -p "$INSTALL_ROOT/plugins/htoa"
 
 tar -xvf htoa-6.3.4.0_r0d5c67f_houdini-20.5.332.py310_gcc11.tar.xz -C "$INSTALL_ROOT/plugins/htoa" --strip-components=1
 
-rm -rf htoa-6.3.4.0_r0d5c67f_houdini-20.5.332.py310_gcc11.tar.xz
+rm -rf $HOME/htoa*.tar.xz
 
 cd $HERE
