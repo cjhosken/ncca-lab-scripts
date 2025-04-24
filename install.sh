@@ -31,11 +31,14 @@ echo "$SOURCE_SCRIPT" >> ~/.bashrc
 
 # Install plugins
 
-wget https://github.com/cjhosken/ncca-lab-scripts/releases/download/htoa/htoa-6.3.4.0_r0d5c67f_houdini-20.5.332.py310_gcc11.tar.xz 
+HTOA_SOURCE=htoa-6.3.4.1_re0e79ae_houdini-20.5.332_gcc11.tar.xz 
 
+wget https://github.com/cjhosken/ncca-lab-scripts/releases/download/htoa/$HTOA_SOURCE
+
+rm -rf "$INSTALL_ROOT/plugins/htoa"
 mkdir -p "$INSTALL_ROOT/plugins/htoa"
 
-tar -xvf htoa-6.3.4.0_r0d5c67f_houdini-20.5.332.py310_gcc11.tar.xz -C "$INSTALL_ROOT/plugins/htoa" --strip-components=1
+tar -xvf $HTOA_SOURCE -C "$INSTALL_ROOT/plugins/htoa" --strip-components=1
 
 rm -rf $HOME/htoa*.tar.xz
 

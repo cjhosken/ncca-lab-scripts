@@ -167,18 +167,14 @@ fi
 if $USE_ARNOLD; then
     # First try with absolute path
     SEARCH_PATH="$DIR/../plugins/htoa"
-    echo "Searching for HtoA in: $SEARCH_PATH"
     # Find the first directory starting with 'htoa-' inside plugins/htoa
     HTOA_DIR=$(ls -d $SEARCH_PATH/htoa-* 2>/dev/null | head -n 1)
 
-    echo $HTOA_DIR
-    
     if [ -n "$HTOA_DIR" ]; then
         export HTOA="$HTOA_DIR"
         export HOUDINI_PATH="$HOUDINI_PATH:$HTOA"
-        echo "HtoA found: $HTOA"
     else
-        echo "Warning: HtoA plugin directory not found in $DIR/../plugins/htoa" >&2
+        echo "Warning: HtoA plugin directory not found!" >&2
     fi
 fi
 
