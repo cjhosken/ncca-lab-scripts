@@ -8,3 +8,5 @@ alias goNuke="$DIR/goNuke.sh"
 alias goChrome="$DIR/goChrome.sh"
 alias goQube="$DIR/goQube.sh"
 alias goTete="$DIR/goTete.sh"
+
+alias onedrive="~/.onedrive/onedrive"

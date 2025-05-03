@@ -45,4 +45,30 @@ unzip "$KEENTOOLS_SOURCE" -d "$KEENTOOLS_SOURCE"_TEMP
 cp -r "$KEENTOOLS_SOURCE"_TEMP/manual/KeenTools ~/.nuke/plugins/
 rm -rf $KEENTOOLS_SOURCE*
 
+### Install onedrive
+
+
+## Install libcurl
+if [! -d ~/local/include/curl]; then
+mkdir -p ~/local/src ~/local
+cd ~/local/src
+wget https://curl.se/download/curl-8.7.1.tar.gz
+tar -xvzf curl-8.7.1.tar.gz
+cd curl-8.7.1
+./configure --prefix=$HOME/local --with-openssl
+make && make install
+fi
+
+export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig:$PKG_CONFIG_PATH
+
+## Get and install onedrive
+curl -fsS https://dlang.org/install.sh | bash -s dmd
+source ~/dlang/dmd-2.111.0/activate
+git clone https://github.com/abraunegg/onedrive.git ~/.onedrive
+cd ~/.onedrive
+./configure --prefix=$HOME/local
+make clean; make
+make install DESTDIR=$HOME/local
+deactivate
+
 cd $HERE
