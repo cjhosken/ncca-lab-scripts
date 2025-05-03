@@ -34,14 +34,14 @@ fi
 export NUKE_DISK_CACHE=/transfer/nuke-cache.$USERNAME
 export NUKE_TEMP_DIR=/transfer/nuke.$USERNAME
 export NUKE_DISK_CACHE_GB=5
-export NUKE_PATH=/public/bapublic/jhardin/tools/nuke/plugins:$NUKE_PATH
+export NUKE_PATH=/public/bapublic/jhardin/tools/nuke/plugins:~/.nuke/plugins/KeenTools:$NUKE_PATH
 
 # Foundry licensing
 export foundry_LICENSE=4101@beijing.bournemouth.ac.uk
 
-# KeenTools licensing (broken)
-# export KEENTOOLS_LICENSE_SERVER=7096@beijing.bournemouth.ac.uk
-# export KEENTOOLS_LICENSE_SERVER=beijing:7096
+# KeenTools licensing
+export KEENTOOLS_LICENSE_SERVER=7096@beijing.bournemouth.ac.uk
+#export KEENTOOLS_LICENSE_SERVER=beijing:7096
 
 echo "Starting Nuke - this can take a few seconds..."
 echo
