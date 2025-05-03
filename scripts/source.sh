@@ -1,10 +1,6 @@
 DIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
-# Set OCIO configuration path
-OCIO_FILE=$(ls -d "$DIR"/../ocio/*.ocio 2>/dev/null | head -n 1)
-if [ -n "$OCIO_FILE" ]; then
-    export OCIO="$OCIO_FILE"
-fi
+export OCIO=/public/bapublic/jhardin/tools/OCIO/BU_nov2024_config.ocio 
 
 alias goHoudini="$DIR/goHoudini.sh"
 alias goMaya="$DIR/goMaya.sh"

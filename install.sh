@@ -17,10 +17,8 @@ rm -rf ~/.oh-my-bash
 python3 -m ensurepip --default-pip
 
 # Copy Go Scripts & Tools
-mkdir -p $INSTALL_ROOT/scripts
-mkdir -p $INSTALL_ROOT/ocio
-cp -r $SCRIPTS_ROOT/* $INSTALL_ROOT/scripts/
-cp -r $OCIO_ROOT/* $INSTALL_ROOT/ocio
+mkdir -p $INSTALL_ROOT
+cp -r $DIR/* $INSTALL_ROOT
 
 SOURCE_SCRIPT="""
 # Custom NCCA Go scripts
