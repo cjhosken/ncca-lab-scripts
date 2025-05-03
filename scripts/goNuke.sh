@@ -40,8 +40,7 @@ export NUKE_PATH=/public/bapublic/jhardin/tools/nuke/plugins:~/.nuke/plugins/Kee
 export foundry_LICENSE=4101@beijing.bournemouth.ac.uk
 
 # KeenTools licensing
-export KEENTOOLS_LICENSE_SERVER=7096@beijing.bournemouth.ac.uk
-#export KEENTOOLS_LICENSE_SERVER=beijing:7096
+export KEENTOOLS_LICENSE_SERVER=beijing.bournemouth.ac.uk:7096
 
 echo "Starting Nuke - this can take a few seconds..."
 echo
