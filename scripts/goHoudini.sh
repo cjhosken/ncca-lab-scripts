@@ -86,6 +86,10 @@ fi
 
 export HOUDINI_PATH=$HOUDINI_PATH:$HOME/houdini$HFS_VERSION:$HFS/houdini:/opt/sidefx_packages/SideFXLabs$HFS_VERSION
 
+
+# For external VSCode editing
+export VISUAL="code"
+
 # ----- Renderman ----- #
 #
 # RENDERMAN IS CRASHING
