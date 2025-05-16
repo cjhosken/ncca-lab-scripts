@@ -74,15 +74,17 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-echo ""
-echo "RenderMan enabled (--prman): $USE_RENDERMAN"
-echo "Arnold enabled (--arnold): $USE_ARNOLD"
-echo ""
-
 if [[ -n "$OCIO_CONFIG" ]]; then
     echo "OCIO Config Path (--ocio): $OCIO_CONFIG"
     export OCIO=$OCIO_CONFIG
 fi
+
+echo ""
+echo "RenderMan enabled (--prman): $USE_RENDERMAN"
+echo "Arnold enabled (--arnold): $USE_ARNOLD"
+echo "OCIO config (--ocio): $OCIO"
+echo ""
+
 
 export HOUDINI_PATH=$HOUDINI_PATH:$HOME/houdini$HFS_VERSION:$HFS/houdini:/opt/sidefx_packages/SideFXLabs$HFS_VERSION
 
